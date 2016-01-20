@@ -5,6 +5,7 @@ use BapCat\Nom\Preprocessor;
 use BapCat\Persist\Directory;
 use BapCat\Persist\FileReader;
 
+use BapCat\Widgetree\ContentType\ContentType;
 use BapCat\Widgetree\Controls\Control;
 
 class Renderer {
@@ -13,15 +14,17 @@ class Renderer {
   private $compiler;
   private $preprocessors;
   
-  public function __construct(Directory $templates, Directory $cache, Compiler $compiler, array $preprocessors = []) {
+  public function __construct(Directory $templates, Directory $cache, ContentType $type, Compiler $compiler, array $preprocessors = []) {
     $this->templates     = $templates;
     $this->cache         = $cache;
     $this->compiler      = $compiler;
     $this->preprocessors = $preprocessors;
+    $this->type          = $type;
   }
   
   public function render(Control $control) {
-    $template_name = str_replace('\\', '.', get_class($control)) . '.html.php';
+    
+    $template_name = str_replace('\\', '.', get_class($control)) . '.' . $this->type->getExtension() . '.php';
     $template = $this->templates->child[$template_name];
     
     if(count($this->preprocessors) != 0) {
