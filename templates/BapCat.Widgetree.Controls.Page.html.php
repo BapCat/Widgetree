@@ -7,6 +7,10 @@
   <title><?= $control->title ?></title>
   
   <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.9.5/css/aui.css" media="all">
+  
+  <!-- ...add our widget CSS as well! this is a work in progress -->
+  <link rel="stylesheet" href="/css.php" media="all">
+
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
   <script src="//aui-cdn.atlassian.com/aui-adg/5.9.5/js/aui.js"></script>
 </head>
