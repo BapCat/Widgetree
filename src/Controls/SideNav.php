@@ -3,6 +3,10 @@
 class SideNav extends Control {
   private $groups = [];
   
+  protected function getSubControls() {
+    return $this->groups;
+  }
+  
   protected function getGroups() {
     return $this->groups;
   }

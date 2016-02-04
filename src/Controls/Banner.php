@@ -3,6 +3,10 @@
 class Banner extends Control {
   private $icon;
   
+  protected function getSubControls() {
+    return ['icon' => $icon];
+  }
+  
   public function hasIcon() {
     return !empty($this->icon);
   }

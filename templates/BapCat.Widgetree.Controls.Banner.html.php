@@ -3,7 +3,7 @@
     <div class="aui-header-primary">
       <h1 class="aui-header-logo aui-header-logo-custom" id="logo">
         <?php if($control->hasIcon()): ?>
-          <?= $renderer->render($control->icon) ?>
+          <?= $renderer->renderControl($control->icon) ?>
         <?php endif; ?>
       </h1>
       

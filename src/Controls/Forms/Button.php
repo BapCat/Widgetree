@@ -14,6 +14,10 @@ class Button extends Control {
     $this->text   = $text;
   }
   
+  protected function getSubControls() {
+    return [];
+  }
+  
   protected function getMethod() {
     return $this->method;
   }

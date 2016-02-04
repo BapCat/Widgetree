@@ -11,6 +11,10 @@ class Label extends Control {
     $this->for  = $for;
   }
   
+  protected function getSubControls() {
+    return [];
+  }
+  
   protected function getText() {
     return $this->text;
   }

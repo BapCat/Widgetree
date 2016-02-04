@@ -10,7 +10,11 @@ $fs = new LocalDriver(__DIR__ . '/..');
 $templates = $fs->getDirectory('/templates');
 $cache     = $fs->getDirectory('/cache');
 
-$renderer = new Renderer($templates, $cache, ContentType::Html(), new Compiler());
+if(!$cache->exists) {
+  $cache->create();
+}
+
+$renderer = new Renderer($templates, $cache, new Compiler());
 
 $page = require __DIR__ . '/page.php';
 

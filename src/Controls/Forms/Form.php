@@ -11,6 +11,10 @@ class Form extends Control {
     $this->id = $id;
   }
   
+  protected function getSubControls() {
+    return $this->groups;
+  }
+  
   public function addGroup(Group $group) {
     $this->groups[] = $group;
   }
