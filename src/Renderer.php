@@ -5,7 +5,7 @@ use BapCat\Nom\Preprocessor;
 use BapCat\Persist\Directory;
 use BapCat\Persist\FileReader;
 
-use BapCat\Widgetree\ContentType\ContentType;
+use BapCat\Widgetree\ContentType;
 use BapCat\Widgetree\Controls\Control;
 
 class Renderer {
@@ -23,8 +23,7 @@ class Renderer {
   }
   
   public function render(Control $control) {
-    
-    $template_name = str_replace('\\', '.', get_class($control)) . '.' . $this->type->getExtension() . '.php';
+    $template_name = str_replace('\\', '.', get_class($control)) . '.' . $this->type->extension . '.php';
     $template = $this->templates->child[$template_name];
     
     if(count($this->preprocessors) != 0) {
