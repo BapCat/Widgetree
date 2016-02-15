@@ -5,6 +5,10 @@ use BapCat\Widgetree\Controls\Control;
 abstract class FormField extends Control {
   private $required;
   
+  protected function getSubControls() {
+    return [];
+  }
+  
   public function required() {
     $this->required = true;
   }

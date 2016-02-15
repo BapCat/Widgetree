@@ -11,6 +11,10 @@ class Icon extends Control {
     $this->link = $link;
   }
   
+  protected function getSubControls() {
+    return [];
+  }
+  
   protected function getAlt() {
     return $this->alt;
   }

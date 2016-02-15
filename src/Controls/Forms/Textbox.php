@@ -9,6 +9,10 @@ class Textbox extends FormField {
     $this->name = $name;
   }
   
+  protected function getSubControls() {
+    return [];
+  }
+  
   protected function getName() {
     return $this->name;
   }

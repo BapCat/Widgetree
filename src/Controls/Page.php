@@ -15,6 +15,19 @@ class Page extends Control {
     $this->title = $title;
   }
   
+  protected function getSubControls() {
+    $controls = [
+      $banner,
+      $nav
+    ];
+    
+    foreach($this->body as $control) {
+      $controls[] = $control;
+    }
+    
+    return $controls;
+  }
+  
   protected function getTitle() {
     return $this->title;
   }
