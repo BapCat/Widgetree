@@ -1,62 +1,33 @@
 <?php namespace BapCat\Widgetree\Controls;
 
 use BapCat\Collection\Collection;
+use BapCat\Widgetree\Renderer;
 
 class Page extends Control {
   private $title;
-  
-  private $banner;
-  private $nav;
-  private $body;
+  private $sections;
   
   public function __construct($title) {
-    $this->body = new Collection();
-    
     $this->title = $title;
-  }
-  
-  protected function getSubControls() {
-    $controls = [
-      $banner,
-      $nav
-    ];
-    
-    foreach($this->body as $control) {
-      $controls[] = $control;
-    }
-    
-    return $controls;
+    $this->sections = new Collection();
   }
   
   protected function getTitle() {
     return $this->title;
   }
   
-  public function hasBanner() {
-    return !empty($this->banner);
+  protected function getSections() {
+    return $this->sections;
   }
   
-  protected function getBanner() {
-    return $this->banner;
-  }
-  
-  protected function setBanner(Banner $banner) {
-    $this->banner = $banner;
-  }
-  
-  public function hasNav() {
-    return !empty($this->nav);
-  }
-  
-  protected function getNav() {
-    return $this->nav;
-  }
-  
-  protected function setNav(SideNav $nav) {
-    $this->nav = $nav;
-  }
-  
-  protected function getBody() {
-    return $this->body;
+  public function render(Renderer $renderer) {
+    return [
+      'title'    => $this->title,
+      'css_file' => $renderer->css_file,
+      'js_file'  => $renderer->js_file,
+      'sections' => $this->sections->map(function($section) use($renderer) {
+        return $renderer->render($section);
+      })
+    ];
   }
 }

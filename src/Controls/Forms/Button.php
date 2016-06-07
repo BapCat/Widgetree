@@ -1,9 +1,9 @@
 <?php namespace BapCat\Widgetree\Controls\Forms;
 
 use BapCat\Values\HttpMethod;
-use BapCat\Widgetree\Controls\Control;
+use BapCat\Widgetree\Renderer;
 
-class Button extends Control {
+class Button extends FormField {
   private $method;
   private $action;
   private $text;
@@ -28,5 +28,13 @@ class Button extends Control {
   
   protected function getText() {
     return $this->text;
+  }
+  
+  public function render(Renderer $renderer) {
+    return [
+      'method' => $this->method,
+      'action' => $this->action,
+      'text'   => $this->text
+    ];
   }
 }

@@ -1,1 +1,1 @@
-<button type="submit" class="button" formmethod="<?= $control->method ?>" formaction="<?= $control->action ?>"><?= $control->text ?></button>
+<button type="submit" formmethod="<?= $method ?>" formaction="<?= $action ?>"><?= $text ?></button>

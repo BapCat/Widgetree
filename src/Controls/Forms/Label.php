@@ -22,4 +22,12 @@ class Label extends Control {
   protected function getFor() {
     return $this->for;
   }
+  
+  public function render(Renderer $renderer) {
+    return [
+      'for'      => $this->for->name,
+      'required' => $this->for->required,
+      'text'     => $this->text
+    ];
+  }
 }

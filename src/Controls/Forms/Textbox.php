@@ -1,9 +1,12 @@
 <?php namespace BapCat\Widgetree\Controls\Forms;
 
+use BapCat\Widgetree\Renderer;
+
 class Textbox extends FormField {
   private $name;
   private $placeholder;
   private $text;
+  private $required;
   
   public function __construct($name) {
     $this->name = $name;
@@ -17,10 +20,6 @@ class Textbox extends FormField {
     return $this->name;
   }
   
-  public function hasPlaceholder() {
-    return !empty($this->placeholder);
-  }
-  
   protected function getPlaceholder() {
     return $this->placeholder;
   }
@@ -29,15 +28,28 @@ class Textbox extends FormField {
     $this->placeholder = $placeholder;
   }
   
-  public function hasText() {
-    return !empty($this->text);
-  }
-  
   protected function getText() {
     return $this->text;
   }
   
   protected function setText($text) {
     $this->text = $text;
+  }
+  
+  protected function getRequired() {
+    return $this->required;
+  }
+  
+  protected function setRequired($required) {
+    $this->required = $required;
+  }
+  
+  public function render(Renderer $renderer) {
+    return [
+      'name'        => $this->name,
+      'placeholder' => $this->placeholder,
+      'text'        => $this->text,
+      'required'    => $this->required
+    ];
   }
 }

@@ -1,5 +1,5 @@
-<form id="<?= $control->id ?>" class="aui">
-  <?php foreach($control->groups as $child): ?>
-    <?= $renderer->renderControl($child) ?>
+<form id="<?= $id ?>">
+  <?php foreach($field_sets as $set): ?>
+    <?= $set ?>
   <?php endforeach; ?>
 </form>

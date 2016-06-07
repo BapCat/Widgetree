@@ -1,9 +1,7 @@
 <?php namespace BapCat\Widgetree;
 
-use BapCat\Nom\Compiler;
-use BapCat\Nom\Preprocessor;
+use BapCat\Nom\Pipeline;
 use BapCat\Persist\Directory;
-use BapCat\Persist\FileReader;
 use BapCat\Propifier\PropifierTrait;
 
 use BapCat\Widgetree\ContentType;
@@ -13,9 +11,7 @@ class Renderer {
   use PropifierTrait;
   
   private $templates;
-  private $cache;
-  private $compiler;
-  private $preprocessors;
+  private $pipeline;
   
   private $css;
   private $js;
@@ -23,11 +19,9 @@ class Renderer {
   private $css_file;
   private $js_file;
   
-  public function __construct(Directory $templates, Directory $cache, Compiler $compiler, array $preprocessors = []) {
-    $this->templates     = $templates;
-    $this->cache         = $cache;
-    $this->compiler      = $compiler;
-    $this->preprocessors = $preprocessors;
+  public function __construct(Directory $templates, Pipeline $pipeline) {
+    $this->templates = $templates;
+    $this->pipeline  = $pipeline;
   }
   
   protected function getCssFile() {
@@ -60,10 +54,7 @@ class Renderer {
     
     $template_name = str_replace('\\', '.', get_class($control)) . '.' . ContentType::Html()->extension . '.php';
     
-    return $this->compile($template_name, [
-      'control'  => $control,
-      'renderer' => $this
-    ]);
+    return $this->compile($template_name, $control->render($this));
   }
   
   private function renderSupport(Control $control, ContentType $type) {
@@ -79,25 +70,6 @@ class Renderer {
       return '';
     }
     
-    if(count($this->preprocessors) != 0) {
-      $code = null;
-      $template->read(function(FileReader $reader) use(&$code) {
-        $code = $reader->read();
-      });
-      
-      $processed_code = $code;
-      
-      foreach($this->preprocessors as $preprocessor) {
-        $processed_code = $preprocessor->process($processed_code);
-      }
-      
-      $template = $this->cache->child[$template_name];
-      
-      //@TODO: use FileWriter when available
-      file_put_contents($template->full_path, $processed_code);
-    }
-    
-    //@TODO: this won't work unless it's a LocalFile
-    return $this->compiler->compile($template, $params);
+    return $this->pipeline->compile($template, $params);
   }
 }

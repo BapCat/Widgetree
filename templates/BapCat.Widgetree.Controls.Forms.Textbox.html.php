@@ -1,15 +1,14 @@
 <input
-  id="<?= $control->name ?>"
-  name="<?= $control->name ?>"
+  id="<?= $name ?>"
+  name="<?= $name ?>"
   type="text"
-  class="text"
-  <?php if($control->hasPlaceholder()): ?>
-    placeholder="<?= $control->placeholder ?>"
+  <?php if(!empty($placeholder)): ?>
+    placeholder="<?= $placeholder ?>"
   <?php endif; ?>
-  <?php if($control->hasText()): ?>
-    value="<?= $control->text ?>"
+  <?php if(!empty($text)): ?>
+    value="<?= $text ?>"
   <?php endif; ?>
-  <?php if($control->required): ?>
+  <?php if($required): ?>
     required
   <?php endif; ?>
 />

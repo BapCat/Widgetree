@@ -1,6 +1,7 @@
 <?php require __DIR__ . '/../vendor/autoload.php';
 
 use BapCat\Nom\Compiler;
+use BapCat\Nom\Pipeline;
 use BapCat\Persist\Drivers\Local\LocalDriver;
 
 use BapCat\Widgetree\ContentType;
@@ -14,9 +15,9 @@ if(!$cache->exists) {
   $cache->create();
 }
 
-$renderer = new Renderer($templates, $cache, new Compiler());
+$pipeline = new Pipeline($cache, new Compiler());
+$renderer = new Renderer($templates, $pipeline);
 
 $page = require __DIR__ . '/page.php';
 
 echo $renderer->render($page);
-
